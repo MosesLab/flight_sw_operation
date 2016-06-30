@@ -1,0 +1,83 @@
+\documentclass[10pt,a4paper,titlepage]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Montana State University}
+\rhead{Kankelborg Research Lab}
+
+\author{Roy Smart, Jordan Maxwell}
+\title{MOSES Flight Software Operation Manual}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Starting the MOSES Flight Computer}
+\begin{enumerate}
+	\item Turn on EGSE \#2
+	\begin{enumerate}
+		\item Log into account \textbf{(Unknown)} with password: \texttt{letmypeoplego}
+		\item Run the program \texttt{MOSES\_SERVER.sh}
+		\begin{enumerate}
+			\item Connect the uplink com port to \texttt{/dev/ttyS5}
+			\item Connect the downlink com port to \texttt{/dev/ttyS4}
+			\item Confirm that the IP server port is set to port \texttt{10000}
+		\end{enumerate}
+		\item Run the program \texttt{MOSES\_CLIENT.sh}
+		\begin{enumerate}
+			\item Navigate to \texttt{File} $\rightarrow$ \texttt{Connect} and connect to the server.
+		\end{enumerate}
+		\item Press \texttt{CTRL + ALT + T} to open the bash shell window. This window will be referred to as Terminal \#1.
+		\begin{enumerate}
+			\item Enter the command \texttt{sudo minicom -s}. If needed, confirm the \texttt{sudo} command with the previous password, \texttt{letmypeoplego}.		
+		\end{enumerate}
+	\end{enumerate}
+	\item Turn on EGSE \#1
+	\begin{enumerate}
+		\item Press the button to toggle the KVM switch to move keyboard control to EGSE1
+		\item Log into account \texttt{Brandon}, with password \textbf{(unknown)}
+		\item Start the Labview analog TM software \textbf{(Path Unknown)}
+	\end{enumerate}
+	\item Confirm that the Agilent \textbf{Model \# unknown} is turned on.
+	\item Power up Power supply \#1 (PS1)
+	\begin{enumerate}
+		\item Press the button labeled \texttt{Recall} twice on the face of PS1 to recover the appropriate voltage/current settings.
+	\end{enumerate}
+	\item Press the button labeled \texttt{CC\_Power} on the timer/uplink deck to turn on the flight computer.
+	\item Toggle the KVM switch to return to EGSE2
+	\begin{enumerate}
+		\item Terminal \#1 should be showing output on the screen. This is the bootup sequence of the flight computer.
+		\begin{enumerate}
+			\item Once the bootup sequence is complete, Terminal \#1 should be prompted with a login. Use the username \texttt{root} and the password is just one space, as in \texttt{" "}.
+		\end{enumerate}
+		\item Press \texttt{CTRL + ALT + T} to open another instance of bash. This window will be referred to as Terminal \#2.
+		\begin{enumerate}
+			\item Open an ssh tunnel by entering the command \texttt{ssh root@}\textbf{(IP address unknown).} If the system can't find the flight computer at that IP address please see the section below labeled \textbf{Locating IP adresses using NMAP}.
+			\begin{enumerate}
+				\item Log into the flight computer using the same passwords as before, username \texttt{root} and password one space, \texttt{" "}.
+				\item Open the flight software log using the command \texttt{tail -f /moses/ramdisk/moses\_log.txt}
+			\end{enumerate}
+		\end{enumerate}
+	\end{enumerate}
+	\item The flight software is now ready to begin taking exposures.
+\end{enumerate}
+
+\section{Using the MOSES Instrument}
+\subsection{Taking Exposures}
+\subsection{Activating the Shutter without the ROE}
+\subsection{Advanced Usage}
+
+\section{Troubleshooting}
+\subsection{Locating IP adresses using NMAP}
+
+\end{document}
